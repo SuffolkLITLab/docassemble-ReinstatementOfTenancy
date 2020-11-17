@@ -48,8 +48,10 @@ code: |
   nav.set_section('review_Reinstatement_of_tenancy')
   user_role = 'plaintiff'
   docket_number
-  if reservation_rights and continue_payments:
-    rent_month
+  if not reservation_rights:
+     continue_payments 
+  if continue_payments:
+     rent_month
   if new_lease:
     effective_after_notice
   if other_reasons:
@@ -93,8 +95,7 @@ fields:
   - 'Docket number': docket_numbers
     datatype: number
 ---
-id: reservation of rights
-question: | 
+question: |
   Does your Notice to Quit have "rights of reservation" language on it that states that that Landlord reserves future monies received by you for "use and occupancy" and "not for rent? 
 yesno: reservation_rights
 ---
