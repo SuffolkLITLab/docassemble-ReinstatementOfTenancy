@@ -106,22 +106,30 @@ question:  |
   Does your Notice to Quit have a reservation of rights? 
 subquestion: |
   Does your Notice to Quit have language in it that states that that Landlord reserves future monies received by you for "use and occupancy" and "not for rent? 
-yesno: reservation_rights
----
-id: Continued rent payments
-question: |
-  Did you continue to pay your Landlord rent after you received the Notice to quit?
-yesno: continue_payments
+fields:
+  - : reservation_rights
+    datatype: yesnoradio
+    required: false
+  - "Did you continue paying your Landlord rent after you received the Notice to quit?": continue_payments
+    datatype: yesnoradio
+    required: false
+    hide if: reservation_rights
+  - What months has your Landlord accepted rents for: rent_month
+    input type: area 
+    show if: continue_payments
+    required: false
 ---
 id: New Lease
-question: 
-  Did you enter into a new lease or execute a lease renewal or extension with your Landlord?
-yesno: new_lease
----
-id: effective after notice
-question:
-  Is the date of your new lease, lease renewal, or lease extension effective after the date of the notice to quit?
-yesno: effective_after_notice
+question: |
+  Did you enter into a new lease, or execute a lease renewal or extension, with your Landlord?
+fields:
+  - : new_lease
+    datatype: yesnoradio
+    required: false
+  - 'Did this happen after you received your notice to quit?': effective_after_notice
+    datatype: yesnoradio
+    show if: new_lease
+    required: false
 ---
 id: other reasons
 question: |
@@ -136,14 +144,6 @@ fields:
     input type: area
     required: false
     show if: other_reasons
----
-id: Rent Payments
-question: |
-  Rent Payments
-subquestion: |
-  For what month(s) have you made rent payments?
-fields:
-  - 'What month(s) has your Landlord accepted rent payment for?': rent_month
 ---
 progress: 100
 mandatory: True
