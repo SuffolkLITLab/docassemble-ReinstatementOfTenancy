@@ -48,6 +48,7 @@ code: |
   nav.set_section('review_Reinstatement_of_tenancy')
   user_role = 'plaintiff'
   docket_number
+  dont_know_docket_number
   if not reservation_rights:
      continue_payments 
   if continue_payments:
@@ -85,18 +86,26 @@ question: |
 subquestion: |
   Here is a preview of the form you'll sign on the next page. 
    ${Reinstatement_of_tenancy_attachment['preview']}
----
-id: docket number
+--- 
+id: Docket Number
 question: |
-  Screen one
-subquestion: |
-  What is the Docket Number of your case?
+  What is your docket number?
 fields:
-  - 'Docket number': docket_numbers
-    datatype: number
+  - I do not know: dont_know_docket_number
+    datatype: yesno
+  - Docket number: docket_number
+    required: false
+    hide if: dont_know_docket_number
+# optional: could set the docket number here if don't know, may be better to do in the attachment block itself
+validation code: |
+  if dont_know_docket_number:
+    docket_number = ''
 ---
-question: |
-  Does your Notice to Quit have "rights of reservation" language on it that states that that Landlord reserves future monies received by you for "use and occupancy" and "not for rent? 
+id: Reservation of Rights
+question:  |
+  Does your Notice to Quit have a reservation of rights? 
+subquestion: |
+  Does your Notice to Quit have language in it that states that that Landlord reserves future monies received by you for "use and occupancy" and "not for rent? 
 yesno: reservation_rights
 ---
 id: Continued rent payments
@@ -116,15 +125,17 @@ yesno: effective_after_notice
 ---
 id: other reasons
 question: |
-  Do you assert any other reason, due to your Landlords actions, or  failure to act, that your tenancy was reinstated or a new one was created?
-yesno: other_reasons
----
-id: other reasons
-question: |
-  Describe your other reasons for dismissal  
-fields:
-  - 'Other reason(s) for dismissal': dismissal_reasons
+  Do you have other reasons your tenancy should be reinstated?
+subquestion: |
+  Are there any other reasons, due to your Landlords actions, or failure to act, that your tenancy was reinstated or a new one was created?
+fields: 
+  - 'Other reason(s) to reinstate tenancy': other_reasons
+    datatype: yesnoradio
+    required: false
+  - 'Describe your reasons': dismissal_reasons
     input type: area
+    required: false
+    show if: other_reasons
 ---
 id: Rent Payments
 question: |
