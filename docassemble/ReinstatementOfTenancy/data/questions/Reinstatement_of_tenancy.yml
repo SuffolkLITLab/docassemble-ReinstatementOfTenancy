@@ -49,7 +49,7 @@ code: |
   user_role = 'plaintiff'
   docket_number
   dont_know_docket_number
-  if not reservation_rights:
+  if reservation_rights:
      continue_payments 
   if continue_payments:
      rent_month
@@ -77,7 +77,7 @@ continue button field: Reinstatement_of_tenancy_intro
 question: |
   Reinstatement of Tenancy Form
 subquestion: |
-  This forms allows a tenant to file a motion to reinstate their tenancy, after eviction have started, if applicable conditions are satisfied.
+  If you are being evicted, this forms may be used a to file a motion to reinstate your tenancy. Answer the following questions to see if your situation qualifies.
 ---
 id: Placeholder preview screen
 continue button field: Reinstatement_of_tenancy_preview_question
@@ -102,22 +102,21 @@ validation code: |
     docket_number = ''
 ---
 id: Reservation of Rights
-question:  |
-  Does your Notice to Quit have a reservation of rights? 
-subquestion: |
-  Does your Notice to Quit have language in it that states that that Landlord reserves future monies received by you for "use and occupancy" and "not for rent? 
+question: |
+  Does your Notice to Quit state that your Landlord reserves future monies received by you for use and occupancy and not for rent?
+noyes: reservation_rights
+---
+id: continue payments
+question: |
+  Did you continue paying your Landlord rent after you received the Notice to quit? 
+yesno: continue_payments
+---
+id: Rent Months
+question: |
+  What months has your Landlord accepted rents for?
 fields:
-  - : reservation_rights
-    datatype: yesnoradio
-    required: false
-  - "Did you continue paying your Landlord rent after you received the Notice to quit?": continue_payments
-    datatype: yesnoradio
-    required: false
-    hide if: reservation_rights
-  - What months has your Landlord accepted rents for: rent_month
+  - Month(s): rent_month
     input type: area 
-    show if: continue_payments
-    required: false
 ---
 id: New Lease
 question: |
@@ -149,7 +148,7 @@ progress: 100
 mandatory: True
 id: Placeholder download screen
 question: |
-  Placeholder download screen
+  Your Reinstatement of tenancy formis ready!
 subquestion: |
   Placeholder
   
