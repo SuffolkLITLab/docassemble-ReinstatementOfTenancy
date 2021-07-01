@@ -84,7 +84,7 @@ continue button field: Reinstatement_of_tenancy_preview_question
 question: |
   Placeholder preview screen
 subquestion: |
-  Here is a preview of the form you'll sign on the next page. 
+  Here is a preview of the form you will sign on the next page. 
    ${Reinstatement_of_tenancy_attachment['preview']}
 --- 
 id: Docket Number
@@ -103,26 +103,26 @@ validation code: |
 ---
 id: Reservation of Rights
 question: |
-  Notice to Quit
 subquestion: |
   Does your Notice to Quit state that your Landlord reserves future monies received by you for use and occupancy and not for rent?
 noyes: reservation_rights
 ---
 id: continue payments
 question: |
-  Did you continue paying your Landlord rent after you received the Notice to quit? 
+subquestion: |
+  Did you continue paying your Landlord rent after you received the Notice to Quit? 
 yesno: continue_payments
 ---
 id: Rent Months
 question: |
-  What months has your Landlord accepted rents for?
+  Which months has your Landlord accepted rent payments for?
 fields:
   - Month(s): rent_month
     input type: area 
 ---
 id: New Lease
 question: |
-  Did you enter into a new lease, or execute a lease renewal or extension, with your Landlord?
+  Did you enter a new lease, or begin a lease renewal or extension, with your Landlord?
 fields:
   - : new_lease
     datatype: yesnoradio
@@ -136,7 +136,7 @@ id: other reasons
 question: |
   Do you have other reasons your tenancy should be reinstated?
 subquestion: |
-  Are there any other reasons, due to your Landlords actions, or failure to act, that your tenancy was reinstated or a new one was created?
+  Are there any other reasons, due to your Landlord's actions or inactions, that you  reinstated your tenancy or created a new tenancy?
 fields: 
   - 'Other reason(s) to reinstate tenancy': other_reasons
     datatype: yesnoradio
