@@ -103,6 +103,8 @@ validation code: |
 ---
 id: Reservation of Rights
 question: |
+  Notice to Quit
+subquestion: |
   Does your Notice to Quit state that your Landlord reserves future monies received by you for use and occupancy and not for rent?
 noyes: reservation_rights
 ---
