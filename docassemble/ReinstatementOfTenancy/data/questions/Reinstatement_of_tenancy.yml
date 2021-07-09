@@ -38,6 +38,12 @@ features:
 sections:
   - review_Reinstatement_of_tenancy: Review your answers
 ---
+code: |
+  interview_short_title = "Dismiss your eviction case if your tenancy was reinstated"
+---
+objects:
+  - other_parties: PeopleList.using(ask_number=True, target_number=1)
+---
 id: interview_order_Reinstatement_of_tenancy
 code: |
   # This is a placeholder to control logic flow in this interview
@@ -46,7 +52,7 @@ code: |
   # Set the allowed courts for this interview
   allowed_courts = interview_metadata["Reinstatement_of_tenancy"]["allowed courts"]
   nav.set_section('review_Reinstatement_of_tenancy')
-  user_role = 'plaintiff'
+  user_role = 'defendant'
   docket_number
   dont_know_docket_number
   if reservation_rights:
@@ -75,14 +81,20 @@ comment: |
 id: Reinstatement of Tenancy Form
 continue button field: Reinstatement_of_tenancy_intro
 question: |
-  Reinstatement of Tenancy Form
+  Motion to Dismiss Eviction Case - Reinstatement of Tenancy
 subquestion: |
-  If you are being evicted, this forms may be used a to file a motion to reinstate your tenancy. Answer the following questions to see if your situation qualifies.
+  If your landlord has done something that is not consistent with evicting
+  you, such as asking you to sign a new lease, a judge may decide that your
+  tenancy has been "reinstated". That means your landlord would lose this
+  case and need to file a new one.
+  
+  This website will help you find out if your landlord has "reinstated"
+  your tenancy.  
 ---
 id: Placeholder preview screen
 continue button field: Reinstatement_of_tenancy_preview_question
 question: |
-  Placeholder preview screen
+  Preview your form before you sign it
 subquestion: |
   Here is a preview of the form you will sign on the next page. 
    ${Reinstatement_of_tenancy_attachment['preview']}
@@ -103,26 +115,36 @@ validation code: |
 ---
 id: Reservation of Rights
 question: |
+  Language in your Notice to Quit
 subquestion: |
-  Does your Notice to Quit state that your Landlord reserves future monies received by you for use and occupancy and not for rent?
+  Take a look at your Notice to Quit.
+  
+  Does your Notice to Quit state that your Landlord reserves future payment
+  by you for use and occupancy and not for rent?
 noyes: reservation_rights
 ---
 id: continue payments
 question: |
+  Continued payments
 subquestion: |
-  Did you continue paying your Landlord rent after you received the Notice to Quit? 
+  Did you continue paying your Landlord rent after you received the Notice to 
+  Quit? 
 yesno: continue_payments
 ---
 id: Rent Months
 question: |
   Which months has your Landlord accepted rent payments for?
+subquestion: |
+  Write the month and year for each payment you made **after** you received
+  the Notice to Quit.
 fields:
   - Month(s): rent_month
     input type: area 
 ---
 id: New Lease
 question: |
-  Did you enter a new lease, or begin a lease renewal or extension, with your Landlord?
+  Did you enter a new lease, or begin a lease renewal or extension, with 
+  your Landlord?
 fields:
   - : new_lease
     datatype: yesnoradio
@@ -136,7 +158,8 @@ id: other reasons
 question: |
   Do you have other reasons your tenancy should be reinstated?
 subquestion: |
-  Are there any other reasons, due to your Landlord's actions or inactions, that you  reinstated your tenancy or created a new tenancy?
+  Are there any other reasons, due to your Landlord's actions or inactions, 
+  that you  reinstated your tenancy or created a new tenancy?
 fields: 
   - 'Other reason(s) to reinstate tenancy': other_reasons
     datatype: yesnoradio
@@ -146,22 +169,29 @@ fields:
     required: false
     show if: other_reasons
 ---
+id: landlords name
+question: |
+  What is your landlord's name?
+fields:
+  - Landlord's full name: other_parties[0].name.first
+---
 progress: 100
 mandatory: True
-id: Placeholder download screen
+id: download screen
 question: |
   Your Reinstatement of Tenancy form is ready!
 subquestion: |
-  Placeholder
-  
-  ### Next steps
-  
-  1. Step 1
-  1. Step 2
-  
+
+  1. Print 3 copies of your form. 
+  1. Deliver one copy to the ${ courts[0] } at ${ courts[0].address.on_one_line() }.
+  1. Deliver one copy to ${ other_parties }.
+  1. Keep a copy for your own records.
+
   Below is a preview of your form.
   
-  ${Reinstatement_of_tenancy_attachment['final'] }
+  ${Reinstatement_of_tenancy_attachment['final'].pdf }
+  
+  [Download a copy in Microsoft Word format](${Reinstatement_of_tenancy_attachment['final'].docx.url_for() }).
 need: Reinstatement_of_tenancy
 attachment code: Reinstatement_of_tenancy_attachment['final']
 ---
@@ -183,6 +213,7 @@ code: |
   else:
     initial_defense.new_tenancy = False
 mandatory: True  
+
 ---
 id: Reinstatement_of_tenancy review screen
 event: review_Reinstatement_of_tenancy
