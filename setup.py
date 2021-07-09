@@ -43,17 +43,17 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.ReinstatementOfTenancy',
-      version='0.0.1',
+      version='0.0.3',
       description=('A docassemble extension.'),
-      long_description='# docassemble.ReinstatementOfTenancy\n\nA docassemble extension.\n\n## Author\n\nmcarroll11@su.suffolk.edu\n\n',
+      long_description='# docassemble.ReinstatementOfTenancy\r\n\r\nA docassemble extension.\r\n\r\n## Author\r\n\r\nmcarroll11@su.suffolk.edu\r\n\r\n',
       long_description_content_type='text/markdown',
-      author='',
+      author='Eleni Constantinou',
       author_email='mcarroll11@su.suffolk.edu',
       license='The MIT License (MIT)',
       url='https://docassemble.org',
       packages=find_packages(),
       namespace_packages=['docassemble'],
-      install_requires=['docassemble.MAVirtualCourt'],
+      install_requires=['docassemble.MAVirtualCourt>=1.0.22'],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/ReinstatementOfTenancy/', package='docassemble.ReinstatementOfTenancy'),
      )
