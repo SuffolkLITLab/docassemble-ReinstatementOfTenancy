@@ -121,7 +121,9 @@ subquestion: |
   
   Does your Notice to Quit state that your Landlord reserves future payment
   by you for use and occupancy and not for rent?
-noyes: reservation_rights
+fields:
+  - no label: reservation_rights
+    datatype: yesnoradio
 ---
 id: continue payments
 question: |
@@ -129,7 +131,9 @@ question: |
 subquestion: |
   Did you continue paying your Landlord rent after you received the Notice to 
   Quit? 
-yesno: continue_payments
+fields:
+  - no label: continue_payments
+    datatype: yesnoradio
 ---
 id: Rent Months
 question: |
