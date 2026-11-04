@@ -150,7 +150,7 @@ question: |
   Did you enter a new lease, or begin a lease renewal or extension, with 
   your Landlord?
 fields:
-  - : new_lease
+  - 'Did you enter a new lease with your landlord?': new_lease
     datatype: yesnoradio
     required: false
   - 'Did this happen after you received your notice to quit?': effective_after_notice
