@@ -123,7 +123,7 @@ subquestion: |
   by you for use and occupancy and not for rent?
 fields:
   - no label: reservation_rights
-    datatype: yesnoradio
+    datatype: noyesradio
 ---
 id: continue payments
 question: |
